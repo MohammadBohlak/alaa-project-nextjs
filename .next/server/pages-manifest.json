@@ -1,7 +1,0 @@
-{
-  "/_app": "pages/_app.js",
-  "/_error": "pages/_error.js",
-  "/_document": "pages/_document.js",
-  "/customers/edit": "pages/customers/edit.js",
-  "/api/posts/[id]": "pages/api/posts/[id].js"
-}
