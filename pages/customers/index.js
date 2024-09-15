@@ -3,7 +3,8 @@ import Link from "next/link";
 import { useState , useEffect } from "react"
 
 let x = true ; 
-export const url = "https://alaa-project-nextjs-9hhq.vercel.app/api/posts"
+export const url = "https://alaa-project-nextjs-9hhq.vercel.app"
+// export const url = "http://localhost:3000"
 export default function Customer(){
     const [data,setData] = useState([])
     const fetchData= ()=>{
