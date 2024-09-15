@@ -8,7 +8,7 @@ export default  async function dbConnect() {
       console.log('Connected successfully !')
 
     } catch (error) {
-        console.log("field connected")
+        console.log("field connected\n" , error)
     }
 }
 

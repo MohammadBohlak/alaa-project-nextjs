@@ -30,6 +30,13 @@ const handler = nc().delete(async(req, res) => {
     }
 
  
-  }) 
+  }).get(async (req,res)=>{
+    try {
+        const post = await Post.findOne({_id: req.query.id})
+        res.send(post);
+    } catch (error) {
+        return  res.status(400).json({message:'Sorry something went wrong !'});
+    }
+  })
  
   export default handler

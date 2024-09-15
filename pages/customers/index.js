@@ -3,11 +3,11 @@ import Link from "next/link";
 import { useState , useEffect } from "react"
 
 let x = true ; 
-const url = "http://localhost:3000"
+export const url = "https://alaa-project-nextjs-9hhq.vercel.app/api/posts"
 export default function Customer(){
     const [data,setData] = useState([])
     const fetchData= ()=>{
-        axios.get("http://localhost:3000/api/posts")
+        axios.get(`${url}/api/posts`)
         .then((res)=>{
             setData(res.data)})
     }
@@ -27,19 +27,25 @@ export default function Customer(){
         }
         
     }
-    function editCustomer(e){
-        console.log(e)
-    }
+    
     return (
         
         <div>
-            <table className="table" dir="rtl">
+            <div className="add-customer">
+                <Link href = "/customers/addcustomer">
+                    <button>
+                        إضافة زبون
+                    </button>
+                </Link>
+            </div>
+            <table className="table-customers" dir="rtl">
                 <thead>
                     <tr>
-                        <td>الاسم</td>
-                        <td>قيمة الرصيد</td>
-                        <td>السعر</td>
-                        <td>التكلفة</td>
+                        <th>الاسم</th>
+                        <th>قيمة الرصيد</th>
+                        <th>السعر</th>
+                        <th>التكلفة</th>
+                        <th>الحدث المراد</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -50,16 +56,16 @@ export default function Customer(){
                                 <td>{e.value}</td>
                                 <td>{e.price}</td>
                                 <td>{e.cost}</td>
-                                <td>
+                                <td className="actions-buttons">
                                     <button onClick={()=>{
                                         deleteCustomer(e)
-                                    }}>حذف</button>
-                                    <Link href="/customers/edit">
-                                        <button onClick={()=>{
-                                            editCustomer(e)
-                                        }}>تعديل</button>
+                                    }} className="del-btn">حذف</button>
+                                    <Link href={`/customers/edit/${e._id}`}>
+                                        <button className="edit-btn" >تعديل</button>
                                     </Link>
-                                    <button>إضافة</button>
+                                    <Link href={`/customers/add/${e._id}`}>
+                                        <button className="add-btn">إضافة</button>
+                                    </Link>
                                 </td>
                             </tr>
                         )

@@ -1,6 +1,135 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
 html{
   direction: rtl;
 }
-.table{
-  
+button{
+  cursor: pointer;
+}
+:root{
+  --font-color : #ECDFCC ; 
+  --bg-color : #181C14 ; 
+  --border-color : #697565; 
+  --del-color : #FF5733; 
+  --edit-color : #32CD32 ;  
+  --add-color : #1E90FF ; 
+}
+body{
+  background-color: var(--bg-color) ;
+  color :var(--font-color); 
+}
+
+.add-customer{
+  height:50px; 
+  display: flex;
+  justify-content: center;
+  align-items: center;  
+}
+.add-customer button{
+  border: none;
+  width: 150px;
+  height: 40px;
+  border-radius: 8px;
+  background-color: var(--add-color);
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  margin-top:10px ;
+}
+
+
+.table-customers{
+  border-collapse:collapse ;
+  margin-top: 30px;
+}
+
+.table-customers td, 
+.table-customers th{
+  border: 1px solid var(--border-color);
+  text-align: center;
+  padding: 5px;  
+}
+
+.actions-buttons{
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+
+}
+.actions-buttons button{
+  width: 100%;
+  height: 20px;
+  border: none;
+  margin-top: 8px;
+  margin-bottom: 5px;
+  font-weight: bold;
+  border-radius: 3px;
+  color: white;
+  /* padding: 10px; */
+}
+
+
+.actions-buttons .del-btn{
+  background-color: var(--del-color);
+}
+.actions-buttons .edit-btn{
+  background-color: var(--edit-color);
+}
+.actions-buttons .add-btn{
+  background-color: var(--add-color);
+}
+
+
+
+
+.edit-modal{
+  color: #ECDFCC;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width:100vw ;
+  height: 100vh;
+  background-color: #181C14  ;
+  /* color: yellow; */
+}
+.edit-modal div{
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.edit-modal div input{
+  background-color: #697565;
+  color: white;
+  outline: none;
+  border: none;
+  margin-right: 5px;
+  padding: 5px;
+  border-radius: 5px;
+  /* font-size: 16px; */
+}
+.edit-modal div.buttons{
+  /* background-color: red; */
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+.edit-modal div.buttons button{
+  width: 60px;
+  height: 30px;
+  border: none;
+  margin-right: 15px;
+  font-size: 16px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+.edit-modal div.buttons button.ok{
+  background-color: rgb(74, 224, 94);
+}
+.edit-modal div.buttons button.back{
+  background-color: rgb(250, 141, 77);
 }
