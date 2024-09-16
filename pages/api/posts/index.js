@@ -1,4 +1,5 @@
 import Post from "@/models/Post";
+import { getCost, getPrice } from "@/pages/customers";
 import dbConnect from "@/utils/dbConnect";
 import nc from "next-connect";
 
@@ -14,25 +15,25 @@ const handler = nc().get(async(req, res) => {
     } catch (error) {
         return  res.status(400).json({message:'Sorry something went wrong !'});
     }
-   
-   
-  }).post(async(req, res) => {
-    const {name,value} = req.body
-    const price = Number(value) / 1000 * 1250 ; 
-    const cost = Number(value) / 1000 * 1043
 
-    // console.log(req.body)
-    const newpost = new Post({name,value , price , cost})
+    
+  }).post(async(req, res) => {
+    let currentDate = new Date();
+    let day = currentDate.getDate();
+    let month = currentDate.getMonth() + 1
+    let year = currentDate.getFullYear();
+    const date = `${day}/${month}/${year}`
+
+    const {name,value} = req.body
+    const price = getPrice(Number(value)) ; 
+    const cost = getCost(Number(value))
+
+    const newpost = new Post({name , value , price , cost , date:date })
     try {
-        console.log("post is " , newpost)
-         await newpost.save()
+        await newpost.save()
         res.send(newpost);
-        // res.send(name)
     } catch (error) {
         return  res.status(400).json({message:'Sorry added something went wrong !'});
     }
   })
-
-
-
-  export default handler
+export default handler

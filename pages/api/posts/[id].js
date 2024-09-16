@@ -1,4 +1,5 @@
 import Post from "@/models/Post";
+import { getCost, getPrice } from "@/pages/customers";
 import dbConnect from "@/utils/dbConnect";
 import nc from "next-connect";
 
@@ -21,8 +22,8 @@ const handler = nc().delete(async(req, res) => {
         const post = await Post.findOne({_id: req.query.id})
         post.name = req.body.name
         post.value= req.body.value
-        post.price= Number(post.value) / 1000 * 1250
-        post.cost= Number(post.value) / 1000 * 1043
+        post.price= getPrice(Number(post.value))
+        post.cost= getCost(Number(post.value))
         await post.save()
         res.send({satus:200,  message:"successful" , customer: post});
     } catch (error) {

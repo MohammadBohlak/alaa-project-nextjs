@@ -4,9 +4,14 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { url } from '../index'
-console.log(url)
+// console.log(url)
 export default function EditId(){
-
+  
+    let currentDate = new Date();
+    let day = currentDate.getDate();
+    let month = currentDate.getMonth() + 1
+    let year = currentDate.getFullYear();
+    const date = `${day}/${month}/${year}`
 
     const router = useRouter()
     const [name , setName] = useState('')
@@ -14,10 +19,12 @@ export default function EditId(){
     const handleSubmit = (e) => {
         e.preventDefault();
       };
+
       function addCustomer(id){
         axios.post(`${url}/api/posts`,{
             name:name,
-            value : Number(value)
+            value : Number(value), 
+            date : date
         }).then(()=>{
             router.push('/customers');
         })

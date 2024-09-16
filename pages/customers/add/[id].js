@@ -24,7 +24,6 @@ export default function Add(){
             name : customer.name ,
             value : newValue
         }).then((res)=>{
-            console.log(res.data)
             router.push('/customers')
         })
     }
