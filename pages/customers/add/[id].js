@@ -7,7 +7,7 @@ import { url } from '../index'
 
 export default function Add(){
     const [customer , setCustomer] = useState({})
-    const [value,setValue] = useState(0)
+    const [value,setValue] = useState()
     const router = useRouter()
     const { id } = router.query
     useEffect(()=>{

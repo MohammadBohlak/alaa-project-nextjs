@@ -21,8 +21,8 @@ export default function Customer() {
   const fetchData = () => {
     axios.get(`${url}/api/posts`).then((res) => {
       let dataOrdered = res.data.sort((a, b) => {
-        let nameA = a.name.toUpperCase();
-        let nameB = b.name.toUpperCase();
+        let nameA = a.name
+        let nameB = b.name
         if (nameA < nameB) {
           return -1;
         }
@@ -73,7 +73,9 @@ export default function Customer() {
     dataCompleteSend+= item + '\n'
     return e
   })
-    
+    let priceTotal = 0 ;
+    let costTotal = 0  ;
+    let valueTotal = 0 ; 
     let dataNotCompleteSend = ""
     let dataNotComplete = uniqueTotal.map((e)=>{
         let item = `
@@ -81,9 +83,13 @@ export default function Customer() {
         المبلغ الكلي: ${e.price}
         `
         dataNotCompleteSend+= item + '\n'
+        priceTotal += e.price
+        costTotal += e.cost
+        valueTotal += e.value
         return e
       })
-      
+      let countCustomers = uniqueTotal.length
+
   const [textAreaData , setTextAreaData] = useState("")
   const [email , setEmail] = useState('abuomarcom4@gmail.com')
   function sendGmail(isComplete){
@@ -174,6 +180,31 @@ export default function Customer() {
               </tr>
             );
           })}
+        </tbody>
+      </table>
+      <table className="table-customers" style={{
+        backgroundColor : '#ECDFCC' , 
+        color:'#181C14', 
+        fontWeight:"bold" , 
+        marginBottom : "10px"
+      }}>
+        <thead>
+         <tr>
+         <th> </th>
+          <th> عدد الزبائن</th>
+          <th> الرصيد</th>
+          <th> الديون</th>
+          <th> الكلفة</th>
+         </tr>
+        </thead>
+        <tbody>
+          <tr>
+          <td>المجموع</td>
+          <td>{countCustomers}</td>
+          <td>{valueTotal}</td>
+          <td>{priceTotal}</td>
+          <td>{costTotal.toFixed(0)}</td>
+          </tr>
         </tbody>
       </table>
       <form onSubmit={handleSubmit} className="gmail-form">

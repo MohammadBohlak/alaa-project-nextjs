@@ -169,6 +169,7 @@ body{
   min-width: 75%;
   margin: 10px auto;
   height: 300px;
+  background-color: white;
 }
   .container-submit-btn{
     display: flex;
