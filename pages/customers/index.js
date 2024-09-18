@@ -2,14 +2,8 @@ import { ValidationError, useForm } from "@formspree/react";
 import axios from "axios";
 import Link from "next/link";
 import { useState, useEffect } from "react";
-// import { useForm, ValidationError } from "@formspree/react";
-// import { useForm, ValidationError } from '@formspree/react';
-
-// let x = true ;
-export const url = "https://alaa-project-nextjs-9hhq.vercel.app"
-
-///////////
 // export const url = "http://localhost:3000";
+export const url = "https://alaa-project-nextjs-9hhq.vercel.app/customers"
 export const getPrice = (value) => value * 1.25;
 export const getCost = (value) => value * 1.043;
 export default function Customer() {
@@ -18,21 +12,25 @@ export default function Customer() {
     alert("تم الارسال بنجاح");
   }
   const [data, setData] = useState([]);
+
   const fetchData = () => {
-    axios.get(`${url}/api/posts`).then((res) => {
-      let dataOrdered = res.data.sort((a, b) => {
-        let nameA = a.name
-        let nameB = b.name
-        if (nameA < nameB) {
-          return -1;
-        }
-        if (nameA > nameB) {
-          return 1;
-        }
-        return 0;
-      });
-      setData(dataOrdered);
-    });
+    axios
+      .get(`${url}/api/posts`)
+      .then((res) => {
+        let dataOrdered = res.data.sort((a, b) => {
+          let nameA = a.name;
+          let nameB = b.name;
+          if (nameA < nameB) {
+            return -1;
+          }
+          if (nameA > nameB) {
+            return 1;
+          }
+          return 0;
+        });
+        setData(dataOrdered);
+      })
+      .finally(() => {});
   };
 
   useEffect(() => {
@@ -41,9 +39,12 @@ export default function Customer() {
   async function deleteCustomer(e) {
     let x = window.confirm(`هل أنت متأكد من حذف بيانات ${e.name}  ؟`);
     if (x) {
-      axios.delete(`${url}/api/posts/${e._id}`).then(() => {
-        fetchData();
-      });
+      axios
+        .delete(`${url}/api/posts/${e._id}`)
+        .then(() => {
+          fetchData();
+        })
+        .finally(() => {});
     }
   }
   let total = data.reduce((acc, curr) => {
@@ -61,58 +62,62 @@ export default function Customer() {
     }
     return acc;
   }, {});
-  let uniqueTotal = Object.values(total); 
-  let dataCompleteSend = ""
-  let dataComplete = data.map((e)=>{
+  let uniqueTotal = Object.values(total);
+  let dataCompleteSend = "";
+  let dataComplete = data.map((e) => {
     let item = `
     الاسم : ${e.name} 
     قيمة الرصيد : ${e.value} 
     السعر: ${e.price}
     التاريخ : ${e.date}
-    `
-    dataCompleteSend+= item + '\n'
-    return e
-  })
-    let priceTotal = 0 ;
-    let costTotal = 0  ;
-    let valueTotal = 0 ; 
-    let dataNotCompleteSend = ""
-    let dataNotComplete = uniqueTotal.map((e)=>{
-        let item = `
+    `;
+    dataCompleteSend += item + "\n";
+    return e;
+  });
+  let priceTotal = 0;
+  let costTotal = 0;
+  let valueTotal = 0;
+  let dataNotCompleteSend = "";
+  let dataNotComplete = uniqueTotal.map((e) => {
+    let item = `
         الاسم : ${e.name} 
         المبلغ الكلي: ${e.price}
-        `
-        dataNotCompleteSend+= item + '\n'
-        priceTotal += e.price
-        costTotal += e.cost
-        valueTotal += e.value
-        return e
-      })
-      let countCustomers = uniqueTotal.length
+        `;
+    dataNotCompleteSend += item + "\n";
+    priceTotal += e.price;
+    costTotal += e.cost;
+    valueTotal += e.value;
+    return e;
+  });
+  let countCustomers = uniqueTotal.length;
 
-  const [textAreaData , setTextAreaData] = useState("")
-  const [email , setEmail] = useState('abuomarcom4@gmail.com')
-  function sendGmail(isComplete){
-    if(isComplete){
-        setTextAreaData(dataCompleteSend)
-        // setEmail('abuomarcom4@gmail.com')
-    }
-    else {
-        setTextAreaData(dataNotCompleteSend)
-        // setEmail('abuomarcom4@gmail.com')
+  const [textAreaData, setTextAreaData] = useState("");
+  const [email, setEmail] = useState("abuomarcom4@gmail.com");
+  function sendGmail(isComplete) {
+    if (isComplete) {
+      setTextAreaData(dataCompleteSend);
+      // setEmail('abuomarcom4@gmail.com')
+    } else {
+      setTextAreaData(dataNotCompleteSend);
+      // setEmail('abuomarcom4@gmail.com')
     }
   }
+
   return (
-
     <div>
-
-          
-          
- 
       <div className="add-customer">
-        <Link href="/customers/addcustomer">
-          <button>إضافة زبون</button>
-        </Link>
+        <div>
+          <Link href="/customers/addcustomer">
+            <button>إضافة زبون من حيث الرصيد</button>
+          </Link>
+        </div>
+        <div>
+          <Link href="/customers/add-customer-money">
+            <button style={{ backgroundColor: " #e91e63" }}>
+              إضافة زبون من حيث المبلغ
+            </button>
+          </Link>
+        </div>
       </div>
       <table className="table-customers" dir="rtl">
         <thead>
@@ -126,7 +131,7 @@ export default function Customer() {
           </tr>
         </thead>
         <tbody>
-           {data.map((e) => {
+          {data.map((e) => {
             return (
               <tr key={e._id}>
                 <td>{e.name}</td>
@@ -182,70 +187,85 @@ export default function Customer() {
           })}
         </tbody>
       </table>
-      <table className="table-customers" style={{
-        backgroundColor : '#ECDFCC' , 
-        color:'#181C14', 
-        fontWeight:"bold" , 
-        marginBottom : "10px"
-      }}>
+      <table
+        className="table-customers"
+        style={{
+          backgroundColor: "#ECDFCC",
+          color: "#181C14",
+          fontWeight: "bold",
+          marginBottom: "10px",
+        }}
+      >
         <thead>
-         <tr>
-         <th> </th>
-          <th> عدد الزبائن</th>
-          <th> الرصيد</th>
-          <th> الديون</th>
-          <th> الكلفة</th>
-         </tr>
+          <tr>
+            <th> </th>
+            <th> عدد الزبائن</th>
+            <th> الرصيد</th>
+            <th> الديون</th>
+            <th> الكلفة</th>
+          </tr>
         </thead>
         <tbody>
           <tr>
-          <td>المجموع</td>
-          <td>{countCustomers}</td>
-          <td>{valueTotal}</td>
-          <td>{priceTotal}</td>
-          <td>{costTotal.toFixed(0)}</td>
+            <td>المجموع</td>
+            <td>{countCustomers}</td>
+            <td>{valueTotal}</td>
+            <td>{priceTotal}</td>
+            <td>{costTotal.toFixed(0)}</td>
           </tr>
         </tbody>
       </table>
       <form onSubmit={handleSubmit} className="gmail-form">
-          <div className="desc-buttons">
-          <button type="button" onClick={()=>{
-            sendGmail(true)
-          }}>
+        <div className="desc-buttons">
+          <button
+            type="button"
+            onClick={() => {
+              sendGmail(true);
+            }}
+          >
             إرسال كامل البيانات
           </button>
-          <button type="button" onClick={()=>{
-            sendGmail(false)
-          }}>
+          <button
+            type="button"
+            onClick={() => {
+              sendGmail(false);
+            }}
+          >
             إرسال البيانات الإحصائية فقط
           </button>
-          </div>
-            <div style={{position:'absolute' , visibility:"hidden"}}>
-            <label htmlFor="email">Email Address</label>
-            <input id="email" type="email" name="email" value = {email} onChange={()=>{}} />
-            <ValidationError prefix="Email" field="email" errors={state.errors} />
-            </div>
-            <div className="cotainer-textarea">
-            <textarea id="message" name="message" value = {textAreaData} onChange={
-                (e)=>{
-                    setTextAreaData(e.target.value)
-                }
-            } />
-            </div>
-            <ValidationError
-              prefix="Message"
-              field="message"
-              errors={state.errors}
-            />
-            <div className="container-submit-btn">
-           <button id="submitGmailBtn" type="submit" disabled={state.submitting}>
-              إرسال
-            </button>
-           </div>
-          
-          </form>
-
-      
+        </div>
+        <div style={{ position: "absolute", visibility: "hidden" }}>
+          <label htmlFor="email">Email Address</label>
+          <input
+            id="email"
+            type="email"
+            name="email"
+            value={email}
+            onChange={() => {}}
+          />
+          <ValidationError prefix="Email" field="email" errors={state.errors} />
+        </div>
+        <div className="cotainer-textarea">
+          <textarea
+            id="message"
+            name="message"
+            value={textAreaData}
+            onChange={(e) => {
+              setTextAreaData(e.target.value);
+            }}
+          />
+        </div>
+        <ValidationError
+          prefix="Message"
+          field="message"
+          errors={state.errors}
+        />
+        <div className="container-submit-btn">
+          <button id="submitGmailBtn" type="submit" disabled={state.submitting}>
+            إرسال
+          </button>
+        </div>
+      </form>
     </div>
   );
 }
