@@ -3,7 +3,7 @@ import axios from "axios";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 // export const url = "http://localhost:3000";
-export const url = "https://alaa-project-nextjs-9hhq.vercel.app/customers"
+export const url = "https://alaa-project-nextjs-9hhq.vercel.app"
 export const getPrice = (value) => value * 1.25;
 export const getCost = (value) => value * 1.043;
 export default function Customer() {

@@ -71,7 +71,7 @@ body{
 }
 .add-customer button{
   border: none;
-  width: 164px;
+  width: 175px;
   height: 40px;
   border-radius: 8px;
   background-color: var(--add-color);
