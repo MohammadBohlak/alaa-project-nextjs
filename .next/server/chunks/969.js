@@ -1,9 +1,41 @@
 "use strict";
-exports.id = 340;
-exports.ids = [340];
+exports.id = 969;
+exports.ids = [969];
 exports.modules = {
 
-/***/ 2340:
+/***/ 8631:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(997);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6689);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+// Layout.js
+
+
+const Layout = ({ visible , children  })=>{
+    return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+        children: [
+            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                className: "loader",
+                style: {
+                    visibility: `${visible}`
+                }
+            }),
+            children
+        ]
+    });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Layout);
+
+
+/***/ }),
+
+/***/ 969:
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
@@ -19,10 +51,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _formspree_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(8296);
 /* harmony import */ var _formspree_react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_formspree_react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(9648);
-/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(1664);
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(9894);
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(6689);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _component_Layout__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(8631);
 var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([axios__WEBPACK_IMPORTED_MODULE_2__]);
 axios__WEBPACK_IMPORTED_MODULE_2__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];
 
@@ -30,17 +63,28 @@ axios__WEBPACK_IMPORTED_MODULE_2__ = (__webpack_async_dependencies__.then ? (awa
 
 
 
+
 // export const url = "http://localhost:3000";
-const url = "https://alaa-project-nextjs-9hhq.vercel.app/customers";
+const url = "https://alaa-project-nextjs-9hhq.vercel.app";
 const getPrice = (value)=>value * 1.25;
 const getCost = (value)=>value * 1.043;
 function Customer() {
+    function useLoader() {
+        const [loader, setLoader] = (0,react__WEBPACK_IMPORTED_MODULE_4__.useState)("hidden");
+        return {
+            loader,
+            setLoader
+        };
+    }
+    ;
     const [state, handleSubmit] = (0,_formspree_react__WEBPACK_IMPORTED_MODULE_1__.useForm)("mqazogok");
     if (state.succeeded) {
         alert("تم الارسال بنجاح");
     }
     const [data, setData] = (0,react__WEBPACK_IMPORTED_MODULE_4__.useState)([]);
+    const { loader , setLoader  } = useLoader();
     const fetchData = ()=>{
+        setLoader("visible");
         axios__WEBPACK_IMPORTED_MODULE_2__["default"].get(`${url}/api/posts`).then((res)=>{
             let dataOrdered = res.data.sort((a, b)=>{
                 let nameA = a.name;
@@ -54,7 +98,9 @@ function Customer() {
                 return 0;
             });
             setData(dataOrdered);
-        }).finally(()=>{});
+        }).finally(()=>{
+            setLoader("hidden");
+        });
     };
     (0,react__WEBPACK_IMPORTED_MODULE_4__.useEffect)(()=>{
         fetchData();
@@ -62,9 +108,12 @@ function Customer() {
     async function deleteCustomer(e) {
         let x = window.confirm(`هل أنت متأكد من حذف بيانات ${e.name}  ؟`);
         if (x) {
+            setLoader("visible");
             axios__WEBPACK_IMPORTED_MODULE_2__["default"]["delete"](`${url}/api/posts/${e._id}`).then(()=>{
                 fetchData();
-            }).finally(()=>{});
+            }).finally(()=>{
+                setLoader("hidden");
+            });
         }
     }
     let total = data.reduce((acc, curr)=>{
@@ -121,7 +170,25 @@ function Customer() {
         // setEmail('abuomarcom4@gmail.com')
         }
     }
-    return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+    let rmvData = data.filter((e)=>{
+        return e.name != "رمضان علوش";
+    });
+    function delelteCustomerData(customer) {
+        let OK = confirm(`هل انت متأكد من حذف جميع بيانات ${customer.name}`);
+        if (OK) {
+            let customerData = data.filter((e)=>{
+                return customer.name == e.name;
+            });
+            console.log(customerData);
+            customerData.forEach((e)=>{
+                axios__WEBPACK_IMPORTED_MODULE_2__["default"]["delete"](`${url}/api/posts/${e._id}`).then(()=>{
+                    fetchData();
+                });
+            });
+        }
+    }
+    return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_component_Layout__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        visible: loader,
         children: [
             /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                 className: "add-customer",
@@ -257,6 +324,9 @@ function Customer() {
                                 }),
                                 /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("th", {
                                     children: "التكلفة"
+                                }),
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("th", {
+                                    children: " "
                                 })
                             ]
                         })
@@ -276,6 +346,16 @@ function Customer() {
                                     }),
                                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("td", {
                                         children: Number(e.cost).toFixed(0)
+                                    }),
+                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("td", {
+                                        className: "actions-buttons",
+                                        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("button", {
+                                            className: "del-btn",
+                                            onClick: ()=>{
+                                                delelteCustomerData(e);
+                                            },
+                                            children: "حذف"
+                                        })
                                     })
                                 ]
                             }, index);

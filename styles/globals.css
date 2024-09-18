@@ -1,75 +1,140 @@
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: Arial, Helvetica, sans-serif;
 }
-html{
+html {
   direction: rtl;
   /* color: #e91e63; */
 }
-button{
+button {
   cursor: pointer;
 }
-:root{
-  --font-color : #ECDFCC ; 
-  --bg-color : #181C14 ; 
-  --border-color : #697565; 
-  --del-color : #FF5733; 
-  --edit-color : #32CD32 ;  
-  --add-color : #1E90FF ; 
-  
+:root {
+  --font-color: #ecdfcc;
+  --bg-color: #181c14;
+  --border-color: #697565;
+  --del-color: #ff5733;
+  --edit-color: #32cd32;
+  --add-color: #1e90ff;
 }
 
 /* loader */
 .loader {
   position: fixed;
-  top: calc(50% - 50px) ; 
-  left : calc(50% - 50px) ;
+  top: calc(50% - 50px);
+  left: calc(50% - 50px);
   width: 100px;
   aspect-ratio: 1;
   border-radius: 50%;
   border: 10px solid #9e94ee;
-  animation:
-    l20-1 0.8s infinite linear alternate,
-    l20-2 1.6s infinite linear;
+  animation: l20-1 0.8s infinite linear alternate, l20-2 1.6s infinite linear;
 }
-@keyframes l20-1{
-   0%    {clip-path: polygon(50% 50%,0       0,  50%   0%,  50%    0%, 50%    0%, 50%    0%, 50%    0% )}
-   12.5% {clip-path: polygon(50% 50%,0       0,  50%   0%,  100%   0%, 100%   0%, 100%   0%, 100%   0% )}
-   25%   {clip-path: polygon(50% 50%,0       0,  50%   0%,  100%   0%, 100% 100%, 100% 100%, 100% 100% )}
-   50%   {clip-path: polygon(50% 50%,0       0,  50%   0%,  100%   0%, 100% 100%, 50%  100%, 0%   100% )}
-   62.5% {clip-path: polygon(50% 50%,100%    0, 100%   0%,  100%   0%, 100% 100%, 50%  100%, 0%   100% )}
-   75%   {clip-path: polygon(50% 50%,100% 100%, 100% 100%,  100% 100%, 100% 100%, 50%  100%, 0%   100% )}
-   100%  {clip-path: polygon(50% 50%,50%  100%,  50% 100%,   50% 100%,  50% 100%, 50%  100%, 0%   100% )}
+@keyframes l20-1 {
+  0% {
+    clip-path: polygon(50% 50%, 0 0, 50% 0%, 50% 0%, 50% 0%, 50% 0%, 50% 0%);
+  }
+  12.5% {
+    clip-path: polygon(
+      50% 50%,
+      0 0,
+      50% 0%,
+      100% 0%,
+      100% 0%,
+      100% 0%,
+      100% 0%
+    );
+  }
+  25% {
+    clip-path: polygon(
+      50% 50%,
+      0 0,
+      50% 0%,
+      100% 0%,
+      100% 100%,
+      100% 100%,
+      100% 100%
+    );
+  }
+  50% {
+    clip-path: polygon(
+      50% 50%,
+      0 0,
+      50% 0%,
+      100% 0%,
+      100% 100%,
+      50% 100%,
+      0% 100%
+    );
+  }
+  62.5% {
+    clip-path: polygon(
+      50% 50%,
+      100% 0,
+      100% 0%,
+      100% 0%,
+      100% 100%,
+      50% 100%,
+      0% 100%
+    );
+  }
+  75% {
+    clip-path: polygon(
+      50% 50%,
+      100% 100%,
+      100% 100%,
+      100% 100%,
+      100% 100%,
+      50% 100%,
+      0% 100%
+    );
+  }
+  100% {
+    clip-path: polygon(
+      50% 50%,
+      50% 100%,
+      50% 100%,
+      50% 100%,
+      50% 100%,
+      50% 100%,
+      0% 100%
+    );
+  }
 }
-@keyframes l20-2{ 
-  0%    {transform:scaleY(1)  rotate(0deg)}
-  49.99%{transform:scaleY(1)  rotate(135deg)}
-  50%   {transform:scaleY(-1) rotate(0deg)}
-  100%  {transform:scaleY(-1) rotate(-135deg)}
+@keyframes l20-2 {
+  0% {
+    transform: scaleY(1) rotate(0deg);
+  }
+  49.99% {
+    transform: scaleY(1) rotate(135deg);
+  }
+  50% {
+    transform: scaleY(-1) rotate(0deg);
+  }
+  100% {
+    transform: scaleY(-1) rotate(-135deg);
+  }
 }
 /* loader End */
 
-
-body{
-  background-color: var(--bg-color) ;
-  color :var(--font-color); 
+body {
+  background-color: var(--bg-color);
+  color: var(--font-color);
 }
-.label-input{
+.label-input {
   width: 40px;
 }
 
-.add-customer{
+.add-customer {
   margin-top: 10px;
-  height: 120px; 
+  height: 120px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;  
-  
+  justify-content: space-between;
 }
-.add-customer button{
+.add-customer button {
   border: none;
   width: 175px;
   height: 40px;
@@ -78,32 +143,29 @@ body{
   font-size: 16px;
   font-weight: bold;
   color: white;
-  margin-top:10px ;
-  padding : 5px
+  margin-top: 10px;
+  padding: 5px;
 }
 
-
-.table-customers{
-  border-collapse:collapse ;
+.table-customers {
+  border-collapse: collapse;
   margin-top: 30px;
   min-width: 385px;
 }
 
-.table-customers td, 
-.table-customers th{
+.table-customers td,
+.table-customers th {
   border: 1px solid var(--border-color);
   text-align: center;
-  padding: 5px;  
+  padding: 5px;
 }
 
-
-.actions-buttons{
+.actions-buttons {
   display: flex;
   flex-direction: column;
   /* align-items: center; */
-
 }
-.actions-buttons button{
+.actions-buttons button {
   width: 60px;
   height: 20px;
   border: none;
@@ -115,40 +177,38 @@ body{
   /* padding: 10px; */
 }
 
-
-.actions-buttons .del-btn{
+.actions-buttons .del-btn {
   background-color: var(--del-color);
 }
-.actions-buttons .edit-btn{
+.actions-buttons .edit-btn {
   background-color: var(--edit-color);
 }
-.actions-buttons .add-btn{
+.actions-buttons .add-btn {
   background-color: var(--add-color);
 }
 
-.actions-buttons .add-cost-btn{
-  background-color: #e91e63 ;
+.actions-buttons .add-cost-btn {
+  background-color: #e91e63;
 }
 
-
-.edit-modal{
-  color: #ECDFCC;
+.edit-modal {
+  color: #ecdfcc;
   display: flex;
   flex-direction: column;
   align-items: center;
   /* width:100vw ; */
   height: 100vh;
-  background-color: #181C14  ;
+  background-color: #181c14;
   margin-top: 10px;
   /* color: yellow; */
 }
-.edit-modal div{
+.edit-modal div {
   margin-top: 10px;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
 }
-.edit-modal div input{
+.edit-modal div input {
   background-color: #697565;
   color: white;
   outline: none;
@@ -158,13 +218,13 @@ body{
   border-radius: 5px;
   /* font-size: 16px; */
 }
-.edit-modal div.buttons{
+.edit-modal div.buttons {
   /* background-color: red; */
   display: flex;
   width: 100%;
   justify-content: center;
 }
-.edit-modal div.buttons button{
+.edit-modal div.buttons button {
   width: 60px;
   height: 30px;
   border: none;
@@ -173,58 +233,56 @@ body{
   border-radius: 5px;
   font-weight: bold;
 }
-.edit-modal div.buttons button.ok{
+.edit-modal div.buttons button.ok {
   background-color: rgb(74, 224, 94);
 }
-.edit-modal div.buttons button.back{
+.edit-modal div.buttons button.back {
   background-color: rgb(250, 141, 77);
 }
 
-
-.gmail-form{
+.gmail-form {
   /* background-color: red; */
 }
-.desc-buttons{
+.desc-buttons {
   margin-top: 10px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
 }
-.desc-buttons button{
+.desc-buttons button {
   border: none;
   min-height: 30px;
-  width :40% ; 
+  width: 40%;
   background-color: #1565c0;
   color: white;
   font-weight: bold;
   padding: 3px;
   border-radius: 3px;
-
 }
 
-.cotainer-textarea{
+.cotainer-textarea {
   display: flex;
   justify-content: center;
 }
-.gmail-form textarea{
+.gmail-form textarea {
   min-width: 75%;
   margin: 10px auto;
   height: 300px;
   background-color: white;
 }
-  .container-submit-btn{
-    display: flex;
-    justify-content: center;
-    margin: 5px 0;
-  }
-  .container-submit-btn button{
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    width: 100px;
-    height: 50px;
-    font-weight: bold;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    font-size: 16px;
-  }
+.container-submit-btn {
+  display: flex;
+  justify-content: center;
+  margin: 5px 0;
+}
+.container-submit-btn button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  width: 100px;
+  height: 50px;
+  font-weight: bold;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  font-size: 16px;
+}

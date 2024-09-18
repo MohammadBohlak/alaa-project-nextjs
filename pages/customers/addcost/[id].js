@@ -3,23 +3,33 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { url } from "../index";
-
+import Layout from "../../component/Layout";
 export default function Add() {
+
+  function useLoader() {
+    const [loader, setLoader] = useState("hidden");
+    return { loader, setLoader };
+  };
+
   const [customer, setCustomer] = useState({});
   const [price, setPrice] = useState();
   const router = useRouter();
-
+  const {loader , setLoader} = useLoader()
   const { id } = router.query;
   useEffect(() => {
+    setLoader("visible")
     axios.get(`${url}/api/posts/${id}`).then((res) => {
       // setValue(0)
       setCustomer(res.data);
+    }).finally(()=>{
+      setLoader("hidden")
     });
   }, []);
   function addValue() {
     // let newPrice =  customer.price + Number(price)
 
     let newValue = Number(price) / 1.25;
+    setLoader("visible")
     axios
       .put(`${url}/api/posts/${id}`, {
         name: customer.name,
@@ -27,10 +37,12 @@ export default function Add() {
       })
       .then((res) => {
         router.push("/customers");
+      }).finally(()=>{
+        setLoader("hidden")
       });
   }
   return (
-    <div>
+    <Layout visible={`${loader}`}>
       <form
         className="edit-modal"
         onSubmit={(e) => {
@@ -69,6 +81,6 @@ export default function Add() {
           </Link>
         </div>
       </form>
-    </div>
+    </Layout>
   );
 }

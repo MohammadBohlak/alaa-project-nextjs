@@ -12,14 +12,14 @@ module.exports = require("mongoose");
 
 /***/ }),
 
-/***/ 704:
+/***/ 6271:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ handler)
 /* harmony export */ });
-/* harmony import */ var _utils_dbConnect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(4405);
+/* harmony import */ var _utils_dbConnect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(7325);
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
 (0,_utils_dbConnect__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z)();
@@ -32,7 +32,7 @@ function handler(req, res) {
 
 /***/ }),
 
-/***/ 4405:
+/***/ 7325:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
@@ -61,7 +61,7 @@ async function dbConnect() {
 var __webpack_require__ = require("../../webpack-api-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = (__webpack_exec__(704));
+var __webpack_exports__ = (__webpack_exec__(6271));
 module.exports = __webpack_exports__;
 
 })();

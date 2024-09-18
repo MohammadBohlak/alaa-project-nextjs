@@ -2,18 +2,27 @@ import { ValidationError, useForm } from "@formspree/react";
 import axios from "axios";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import Layout from "../component/Layout";
 // export const url = "http://localhost:3000";
 export const url = "https://alaa-project-nextjs-9hhq.vercel.app"
 export const getPrice = (value) => value * 1.25;
 export const getCost = (value) => value * 1.043;
 export default function Customer() {
+
+  function useLoader() {
+    const [loader, setLoader] = useState("hidden");
+    return { loader, setLoader };
+  };
+
   const [state, handleSubmit] = useForm("mqazogok");
   if (state.succeeded) {
     alert("تم الارسال بنجاح");
   }
   const [data, setData] = useState([]);
+  const {loader , setLoader} = useLoader()
 
   const fetchData = () => {
+    setLoader("visible")
     axios
       .get(`${url}/api/posts`)
       .then((res) => {
@@ -30,7 +39,9 @@ export default function Customer() {
         });
         setData(dataOrdered);
       })
-      .finally(() => {});
+      .finally(() => {
+        setLoader("hidden")
+      });
   };
 
   useEffect(() => {
@@ -39,12 +50,15 @@ export default function Customer() {
   async function deleteCustomer(e) {
     let x = window.confirm(`هل أنت متأكد من حذف بيانات ${e.name}  ؟`);
     if (x) {
+      setLoader("visible")
       axios
         .delete(`${url}/api/posts/${e._id}`)
         .then(() => {
           fetchData();
         })
-        .finally(() => {});
+        .finally(() => {
+          setLoader("hidden")
+        });
     }
   }
   let total = data.reduce((acc, curr) => {
@@ -102,9 +116,29 @@ export default function Customer() {
       // setEmail('abuomarcom4@gmail.com')
     }
   }
+  let rmvData = data.filter((e)=>{
+      return e.name != "رمضان علوش"
+  })
+
+  function delelteCustomerData(customer){
+    let OK = confirm(`هل انت متأكد من حذف جميع بيانات ${customer.name}`)
+    if(OK){
+      let customerData = data.filter((e)=>{
+        return customer.name == e.name
+      })
+      console.log(customerData)
+      
+      customerData.forEach((e)=>{
+        axios.delete(`${url}/api/posts/${e._id}`)
+        .then(()=>{
+          fetchData() 
+        })
+      })
+    }
+  }
 
   return (
-    <div>
+    <Layout visible={loader}>
       <div className="add-customer">
         <div>
           <Link href="/customers/addcustomer">
@@ -172,6 +206,7 @@ export default function Customer() {
             <th>قيمة الرصيد</th>
             <th>السعر</th>
             <th>التكلفة</th>
+            <th> </th>
           </tr>
         </thead>
         <tbody>
@@ -182,6 +217,11 @@ export default function Customer() {
                 <td>{e.value}</td>
                 <td>{Number(e.price).toFixed(0)}</td>
                 <td>{Number(e.cost).toFixed(0)}</td>
+                <td className="actions-buttons">
+                  <button className="del-btn" onClick={()=>{
+                    delelteCustomerData(e)
+                  }} >حذف</button>
+                </td>
               </tr>
             );
           })}
@@ -266,6 +306,6 @@ export default function Customer() {
           </button>
         </div>
       </form>
-    </div>
+    </Layout>
   );
 }

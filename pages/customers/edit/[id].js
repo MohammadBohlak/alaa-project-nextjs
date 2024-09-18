@@ -3,8 +3,14 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { url } from "../index";
-
+import Layout from "../../component/Layout";
 export default function EditId() {
+
+  function useLoader() {
+    const [loader, setLoader] = useState("hidden");
+    return { loader, setLoader };
+  };
+
   useEffect(() => {
     axios.get(`${url}/api/posts/${id}`).then((res) => {
       setName(res.data.name);
@@ -14,13 +20,14 @@ export default function EditId() {
 
   const router = useRouter();
   const { id } = router.query;
-
+  const {loader , setLoader} = useLoader()
   const [name, setName] = useState("");
   const [value, setValue] = useState("");
   const handleSubmit = (e) => {
     e.preventDefault();
   };
   function editCustomer(id) {
+    setLoader("visible")
     axios
       .put(`${url}/api/posts/${id}`, {
         name: name,
@@ -29,10 +36,12 @@ export default function EditId() {
       .then(() => {
         router.push("/customers");
       })
-      .finally(() => {});
+      .finally(() => {
+        setLoader("hidden")
+      });
   }
   return (
-    <div>
+    <Layout visible={`${loader}`}>
       <form className="edit-modal" onSubmit={handleSubmit}>
         <div>
           <label>name</label>
@@ -68,6 +77,6 @@ export default function EditId() {
           </Link>
         </div>
       </form>
-    </div>
+    </Layout>
   );
 }

@@ -3,7 +3,14 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { getCost, getPrice, url } from "../index";
+import Layout from "../../component/Layout";
+
 export default function EditId() {
+
+  function useLoader() {
+    const [loader, setLoader] = useState("hidden");
+    return { loader, setLoader };
+  };
   let currentDate = new Date();
   let day = currentDate.getDate();
   let month = currentDate.getMonth() + 1;
@@ -11,7 +18,7 @@ export default function EditId() {
   const date = `${day}/${month}/${year}`;
 
   const router = useRouter();
-
+  const {loader , setLoader} = useLoader()
   const [name, setName] = useState("");
   const [value, setValue] = useState("");
   const [price, setPrice] = useState(0);
@@ -20,6 +27,7 @@ export default function EditId() {
   };
 
   function addCustomer(id) {
+    setLoader("visible")
     axios
       .post(`${url}/api/posts`, {
         name: name,
@@ -28,10 +36,12 @@ export default function EditId() {
       })
       .then(() => {
         router.push("/customers");
+      }).finally(()=>{
+        setLoader("hidden")
       });
   }
   return (
-    <div>
+    <Layout visible={`${loader}`}>
       <form className="edit-modal" onSubmit={handleSubmit}>
         <h2>أدخل قيمة الرصيد المرادة</h2>
         <div>
@@ -82,6 +92,6 @@ export default function EditId() {
           </Link>
         </div>
       </form>
-    </div>
+    </Layout>
   );
 }
