@@ -3,23 +3,26 @@ import axios from "axios";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import Layout from "../component/Layout";
+import {useLoader} from '../../hook/useLoader'
 // export const url = "http://localhost:3000";
 export const url = "https://alaa-project-nextjs-9hhq.vercel.app"
+
 export const getPrice = (value) => value * 1.25;
 export const getCost = (value) => value * 1.043;
 export default function Customer() {
 
-  function useLoader() {
-    const [loader, setLoader] = useState("hidden");
-    return { loader, setLoader };
-  };
+  // function useLoader() {
+  //   const [loader, setLoader] = useState("hidden");
+  //   return { loader, setLoader };
+  // };
+  const {loader , setLoader} = useLoader()
 
   const [state, handleSubmit] = useForm("mqazogok");
   if (state.succeeded) {
     alert("تم الارسال بنجاح");
   }
   const [data, setData] = useState([]);
-  const {loader , setLoader} = useLoader()
+  // const {loader , setLoader} = useLoader()
 
   const fetchData = () => {
     setLoader("visible")

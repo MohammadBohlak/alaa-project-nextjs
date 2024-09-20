@@ -4,12 +4,14 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { url } from "../index";
 import Layout from "../../component/Layout";
+import {useLoader} from "@/hook/useLoader";
+
 export default function EditId() {
 
-  function useLoader() {
-    const [loader, setLoader] = useState("hidden");
-    return { loader, setLoader };
-  };
+  // function useLoader() {
+  //   const [loader, setLoader] = useState("hidden");
+  //   return { loader, setLoader };
+  // };
 
   useEffect(() => {
     axios.get(`${url}/api/posts/${id}`).then((res) => {

@@ -3,6 +3,33 @@ exports.id = 542;
 exports.ids = [542];
 exports.modules = {
 
+/***/ 5630:
+/***/ ((module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+Object.defineProperty(exports, "useLoader", ({
+    enumerable: true,
+    get: ()=>useLoader
+}));
+const _react = __webpack_require__(6689);
+function useLoader() {
+    const [loader, setLoader] = (0, _react.useState)("hidden");
+    //    const obj = {loader , setLoader}
+    return {
+        loader,
+        setLoader
+    };
+}
+module.exports = {
+    useLoader
+};
+
+
+/***/ }),
+
 /***/ 4681:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -69,8 +96,11 @@ __webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __we
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(6689);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _component_Layout__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(9018);
+/* harmony import */ var _hook_useLoader__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(5630);
+/* harmony import */ var _hook_useLoader__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_hook_useLoader__WEBPACK_IMPORTED_MODULE_6__);
 var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([axios__WEBPACK_IMPORTED_MODULE_2__]);
 axios__WEBPACK_IMPORTED_MODULE_2__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];
+
 
 
 
@@ -82,20 +112,17 @@ const url = "https://alaa-project-nextjs-9hhq.vercel.app";
 const getPrice = (value)=>value * 1.25;
 const getCost = (value)=>value * 1.043;
 function Customer() {
-    function useLoader() {
-        const [loader, setLoader] = useState("hidden");
-        return {
-            loader,
-            setLoader
-        };
-    }
-    ;
+    // function useLoader() {
+    //   const [loader, setLoader] = useState("hidden");
+    //   return { loader, setLoader };
+    // };
+    const { loader , setLoader  } = useLoader();
     const [state, handleSubmit] = useForm("mqazogok");
     if (state.succeeded) {
         alert("تم الارسال بنجاح");
     }
     const [data, setData] = useState([]);
-    const { loader , setLoader  } = useLoader();
+    // const {loader , setLoader} = useLoader()
     const fetchData = ()=>{
         setLoader("visible");
         axios.get(`${url}/api/posts`).then((res)=>{

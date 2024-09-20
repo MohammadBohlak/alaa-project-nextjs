@@ -4,13 +4,14 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { url } from "../index";
 import Layout from "../../component/Layout";
+import {useLoader} from "@/hook/useLoader";
 
 export default function EditId() {
 
-  function useLoader() {
-    const [loader, setLoader] = useState("hidden");
-    return { loader, setLoader };
-  };
+  // function useLoader() {
+  //   const [loader, setLoader] = useState("hidden");
+  //   return { loader, setLoader };
+  // };
 
   let currentDate = new Date();
   let day = currentDate.getDate();
@@ -71,13 +72,12 @@ export default function EditId() {
           <div
             style={{
               display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between",
+              flexDirection: "row",
               height: "50px",
             }}
           >
-            <p> الرصيد الذي سيتم تحويله للزبون: {valueApi}</p>
-            <p>تكلفة الرصيد عليك : {cost.toFixed(0)}</p>
+            <p style={{width:"100%" , textAlign:"center"}}> الرصيد الذي سيتم تحويله للزبون: {valueApi}</p>
+            <p style={{width:"100%" , textAlign:"center"}}>تكلفة الرصيد عليك : {cost.toFixed(0)}</p>
           </div>
         ) : undefined}
         <div className="buttons">

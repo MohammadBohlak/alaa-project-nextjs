@@ -4,16 +4,16 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { url } from "../index";
 import Layout from "../../component/Layout";
-
+import {useLoader} from "@/hook/useLoader";
 export default function Add() {
 
-  function useLoader() {
-    const [loader, setLoader] = useState("hidden");
-    return { loader, setLoader };
-  };
+  // function useLoader() {
+  //   const [loader, setLoader] = useState("hidden");
+  //   return { loader, setLoader };
+  // };
 
   const [customer, setCustomer] = useState({});
-  const [value, setValue] = useState();
+  const [value, setValue] = useState('');
   const router = useRouter();
   const { id } = router.query;
   const {loader,setLoader} = useLoader()
