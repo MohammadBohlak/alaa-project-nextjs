@@ -77,7 +77,7 @@ export default function EditId() {
             }}
           >
             <p style={{width:"100%" , textAlign:"center"}}> الرصيد الذي سيتم تحويله للزبون: {valueApi}</p>
-            <p style={{width:"100%" , textAlign:"center"}}>تكلفة الرصيد عليك : {cost.toFixed(0)}</p>
+            <p style={{width:"100%" , textAlign:"center"}}>رقم العملية : {cost.toFixed(0)}</p>
           </div>
         ) : undefined}
         <div className="buttons">

@@ -58,9 +58,9 @@ export default function Add() {
             justifyContent: "center",
           }}
         >
-          <label style={{ marginBottom: "5px" }}>
+          <h2 style={{ marginBottom: "5px" }}>
             أدخل الرصيد المراد إضافته
-          </label>
+          </h2>
           <input
             type="text"
             value={value}

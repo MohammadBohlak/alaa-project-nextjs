@@ -76,7 +76,7 @@ export default function EditId() {
             }}
           >
             <p style={{width:"100%" , textAlign:"center"}}>سعر الرصيد على الزبون : {price}</p>
-            <p style={{width:"100%" , textAlign:"center"}}>تكلفة الرصيد عليك : {getCost(value).toFixed(0)}</p>
+            <p style={{width:"100%" , textAlign:"center"}}> رقم العملية : {getCost(value).toFixed(0)}</p>
           </div>
         ) : undefined}
         <div className="buttons">

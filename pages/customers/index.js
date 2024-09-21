@@ -142,23 +142,77 @@ export default function Customer() {
 
   return (
     <Layout visible={loader}>
+      
       <div className="add-customer">
         <div>
           <Link href="/customers/addcustomer">
-            <button>إضافة زبون من حيث الرصيد</button>
+            <button className="add-value-btn">إضافة زبون من حيث الرصيد</button>
           </Link>
         </div>
         <div>
           <Link href="/customers/add-customer-money">
-            <button style={{ backgroundColor: " #e91e63" }}>
+            <button className="add-cost-btn">
               إضافة زبون من حيث المبلغ
             </button>
           </Link>
         </div>
+       
       </div>
+      <h3 className="title-table">جدول الإحصائيات</h3>
       <table className="table-customers" dir="rtl">
         <thead>
+          <tr className="head-table" >
+            <th>م</th>
+            <th>الاسم</th>
+            <th>قيمة الرصيد</th>
+            <th>السعر</th>
+            <th>التكلفة</th>
+            <th> </th>
+          </tr>
+        </thead>
+        <tbody>
+          {uniqueTotal.map((e, index) => {
+            return (
+              <tr key={index} style={{color:"black"}}>
+                <td style={{background:"var(--add-color)" , color:"white" , borderColor:"white"} }>{index + 1}</td>
+                <td>{e.name}</td>
+                <td>{e.value}</td>
+                <td>{Number(e.price).toFixed(0)}</td>
+                <td>{Number(e.cost).toFixed(0)}</td>
+                <td style={{height:"100%"}} className="actions-buttons">
+                  <button className="del-btn" onClick={()=>{
+                    delelteCustomerData(e)
+                  }} >حذف</button>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+      <table
+        className="table-total">
+        <thead>
           <tr>
+            <th> </th>
+            <th> عدد الزبائن</th>
+            <th> الرصيد</th>
+            <th> الديون</th>
+            <th> الكلفة</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style={{background:"var(--add-color)" , color:"white"}}>المجموع</td>
+            <td>{countCustomers}</td>
+            <td>{valueTotal}</td>
+            <td>{priceTotal}</td>
+            <td>{costTotal.toFixed(0)}</td>
+          </tr>
+        </tbody>
+      </table>
+      <table className="table-customers" dir="rtl">
+        <thead>
+          <tr className="head-table">
             <th>الاسم</th>
             <th>قيمة الرصيد</th>
             <th>السعر</th>
@@ -181,7 +235,6 @@ export default function Customer() {
                     onClick={() => {
                       deleteCustomer(e);
                     }}
-                    className="del-btn"
                   >
                     حذف
                   </button>
@@ -201,63 +254,6 @@ export default function Customer() {
         </tbody>
       </table>
 
-      <h3 style={{ marginTop: "30px" }}>جدول الإحصائيات</h3>
-      <table className="table-customers" dir="rtl">
-        <thead>
-          <tr>
-            <th>الاسم</th>
-            <th>قيمة الرصيد</th>
-            <th>السعر</th>
-            <th>التكلفة</th>
-            <th> </th>
-          </tr>
-        </thead>
-        <tbody>
-          {uniqueTotal.map((e, index) => {
-            return (
-              <tr key={index}>
-                <td>{e.name}</td>
-                <td>{e.value}</td>
-                <td>{Number(e.price).toFixed(0)}</td>
-                <td>{Number(e.cost).toFixed(0)}</td>
-                <td className="actions-buttons">
-                  <button className="del-btn" onClick={()=>{
-                    delelteCustomerData(e)
-                  }} >حذف</button>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-      <table
-        className="table-customers"
-        style={{
-          backgroundColor: "#ECDFCC",
-          color: "#181C14",
-          fontWeight: "bold",
-          marginBottom: "10px",
-        }}
-      >
-        <thead>
-          <tr>
-            <th> </th>
-            <th> عدد الزبائن</th>
-            <th> الرصيد</th>
-            <th> الديون</th>
-            <th> الكلفة</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>المجموع</td>
-            <td>{countCustomers}</td>
-            <td>{valueTotal}</td>
-            <td>{priceTotal}</td>
-            <td>{costTotal.toFixed(0)}</td>
-          </tr>
-        </tbody>
-      </table>
       <form onSubmit={handleSubmit} className="gmail-form">
         <div className="desc-buttons">
           <button

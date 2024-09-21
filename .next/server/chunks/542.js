@@ -62,6 +62,12 @@ const postSchema = new mongoose.Schema({
 const Layout = ({ visible , children  })=>{
     return /*#__PURE__*/ _jsxs("div", {
         children: [
+            /*#__PURE__*/ _jsx("img", {
+                src: "https://my.syriatel.sy/images/logo.png",
+                style: {
+                    width: "calc(100vw - 40px)"
+                }
+            }),
             /*#__PURE__*/ _jsx("div", {
                 className: "loader",
                 style: {
@@ -237,6 +243,7 @@ function Customer() {
                         children: /*#__PURE__*/ _jsx(Link, {
                             href: "/customers/addcustomer",
                             children: /*#__PURE__*/ _jsx("button", {
+                                className: "add-value-btn",
                                 children: "إضافة زبون من حيث الرصيد"
                             })
                         })
@@ -245,11 +252,139 @@ function Customer() {
                         children: /*#__PURE__*/ _jsx(Link, {
                             href: "/customers/add-customer-money",
                             children: /*#__PURE__*/ _jsx("button", {
-                                style: {
-                                    backgroundColor: " #e91e63"
-                                },
+                                className: "add-cost-btn",
                                 children: "إضافة زبون من حيث المبلغ"
                             })
+                        })
+                    })
+                ]
+            }),
+            /*#__PURE__*/ _jsx("h3", {
+                className: "title-table",
+                children: "جدول الإحصائيات"
+            }),
+            /*#__PURE__*/ _jsxs("table", {
+                className: "table-customers",
+                dir: "rtl",
+                children: [
+                    /*#__PURE__*/ _jsx("thead", {
+                        children: /*#__PURE__*/ _jsxs("tr", {
+                            className: "head-table",
+                            children: [
+                                /*#__PURE__*/ _jsx("th", {
+                                    children: "م"
+                                }),
+                                /*#__PURE__*/ _jsx("th", {
+                                    children: "الاسم"
+                                }),
+                                /*#__PURE__*/ _jsx("th", {
+                                    children: "قيمة الرصيد"
+                                }),
+                                /*#__PURE__*/ _jsx("th", {
+                                    children: "السعر"
+                                }),
+                                /*#__PURE__*/ _jsx("th", {
+                                    children: "التكلفة"
+                                }),
+                                /*#__PURE__*/ _jsx("th", {
+                                    children: " "
+                                })
+                            ]
+                        })
+                    }),
+                    /*#__PURE__*/ _jsx("tbody", {
+                        children: uniqueTotal.map((e, index)=>{
+                            return /*#__PURE__*/ _jsxs("tr", {
+                                style: {
+                                    color: "black"
+                                },
+                                children: [
+                                    /*#__PURE__*/ _jsx("td", {
+                                        style: {
+                                            background: "var(--add-color)",
+                                            color: "white",
+                                            borderColor: "white"
+                                        },
+                                        children: index + 1
+                                    }),
+                                    /*#__PURE__*/ _jsx("td", {
+                                        children: e.name
+                                    }),
+                                    /*#__PURE__*/ _jsx("td", {
+                                        children: e.value
+                                    }),
+                                    /*#__PURE__*/ _jsx("td", {
+                                        children: Number(e.price).toFixed(0)
+                                    }),
+                                    /*#__PURE__*/ _jsx("td", {
+                                        children: Number(e.cost).toFixed(0)
+                                    }),
+                                    /*#__PURE__*/ _jsx("td", {
+                                        style: {
+                                            height: "100%"
+                                        },
+                                        className: "actions-buttons",
+                                        children: /*#__PURE__*/ _jsx("button", {
+                                            className: "del-btn",
+                                            onClick: ()=>{
+                                                delelteCustomerData(e);
+                                            },
+                                            children: "حذف"
+                                        })
+                                    })
+                                ]
+                            }, index);
+                        })
+                    })
+                ]
+            }),
+            /*#__PURE__*/ _jsxs("table", {
+                className: "table-total",
+                children: [
+                    /*#__PURE__*/ _jsx("thead", {
+                        children: /*#__PURE__*/ _jsxs("tr", {
+                            children: [
+                                /*#__PURE__*/ _jsx("th", {
+                                    children: " "
+                                }),
+                                /*#__PURE__*/ _jsx("th", {
+                                    children: " عدد الزبائن"
+                                }),
+                                /*#__PURE__*/ _jsx("th", {
+                                    children: " الرصيد"
+                                }),
+                                /*#__PURE__*/ _jsx("th", {
+                                    children: " الديون"
+                                }),
+                                /*#__PURE__*/ _jsx("th", {
+                                    children: " الكلفة"
+                                })
+                            ]
+                        })
+                    }),
+                    /*#__PURE__*/ _jsx("tbody", {
+                        children: /*#__PURE__*/ _jsxs("tr", {
+                            children: [
+                                /*#__PURE__*/ _jsx("td", {
+                                    style: {
+                                        background: "var(--add-color)",
+                                        color: "white"
+                                    },
+                                    children: "المجموع"
+                                }),
+                                /*#__PURE__*/ _jsx("td", {
+                                    children: countCustomers
+                                }),
+                                /*#__PURE__*/ _jsx("td", {
+                                    children: valueTotal
+                                }),
+                                /*#__PURE__*/ _jsx("td", {
+                                    children: priceTotal
+                                }),
+                                /*#__PURE__*/ _jsx("td", {
+                                    children: costTotal.toFixed(0)
+                                })
+                            ]
                         })
                     })
                 ]
@@ -260,6 +395,7 @@ function Customer() {
                 children: [
                     /*#__PURE__*/ _jsx("thead", {
                         children: /*#__PURE__*/ _jsxs("tr", {
+                            className: "head-table",
                             children: [
                                 /*#__PURE__*/ _jsx("th", {
                                     children: "الاسم"
@@ -308,7 +444,6 @@ function Customer() {
                                                 onClick: ()=>{
                                                     deleteCustomer(e);
                                                 },
-                                                className: "del-btn",
                                                 children: "حذف"
                                             }),
                                             /*#__PURE__*/ _jsx(Link, {
@@ -336,122 +471,6 @@ function Customer() {
                                     })
                                 ]
                             }, e._id);
-                        })
-                    })
-                ]
-            }),
-            /*#__PURE__*/ _jsx("h3", {
-                style: {
-                    marginTop: "30px"
-                },
-                children: "جدول الإحصائيات"
-            }),
-            /*#__PURE__*/ _jsxs("table", {
-                className: "table-customers",
-                dir: "rtl",
-                children: [
-                    /*#__PURE__*/ _jsx("thead", {
-                        children: /*#__PURE__*/ _jsxs("tr", {
-                            children: [
-                                /*#__PURE__*/ _jsx("th", {
-                                    children: "الاسم"
-                                }),
-                                /*#__PURE__*/ _jsx("th", {
-                                    children: "قيمة الرصيد"
-                                }),
-                                /*#__PURE__*/ _jsx("th", {
-                                    children: "السعر"
-                                }),
-                                /*#__PURE__*/ _jsx("th", {
-                                    children: "التكلفة"
-                                }),
-                                /*#__PURE__*/ _jsx("th", {
-                                    children: " "
-                                })
-                            ]
-                        })
-                    }),
-                    /*#__PURE__*/ _jsx("tbody", {
-                        children: uniqueTotal.map((e, index)=>{
-                            return /*#__PURE__*/ _jsxs("tr", {
-                                children: [
-                                    /*#__PURE__*/ _jsx("td", {
-                                        children: e.name
-                                    }),
-                                    /*#__PURE__*/ _jsx("td", {
-                                        children: e.value
-                                    }),
-                                    /*#__PURE__*/ _jsx("td", {
-                                        children: Number(e.price).toFixed(0)
-                                    }),
-                                    /*#__PURE__*/ _jsx("td", {
-                                        children: Number(e.cost).toFixed(0)
-                                    }),
-                                    /*#__PURE__*/ _jsx("td", {
-                                        className: "actions-buttons",
-                                        children: /*#__PURE__*/ _jsx("button", {
-                                            className: "del-btn",
-                                            onClick: ()=>{
-                                                delelteCustomerData(e);
-                                            },
-                                            children: "حذف"
-                                        })
-                                    })
-                                ]
-                            }, index);
-                        })
-                    })
-                ]
-            }),
-            /*#__PURE__*/ _jsxs("table", {
-                className: "table-customers",
-                style: {
-                    backgroundColor: "#ECDFCC",
-                    color: "#181C14",
-                    fontWeight: "bold",
-                    marginBottom: "10px"
-                },
-                children: [
-                    /*#__PURE__*/ _jsx("thead", {
-                        children: /*#__PURE__*/ _jsxs("tr", {
-                            children: [
-                                /*#__PURE__*/ _jsx("th", {
-                                    children: " "
-                                }),
-                                /*#__PURE__*/ _jsx("th", {
-                                    children: " عدد الزبائن"
-                                }),
-                                /*#__PURE__*/ _jsx("th", {
-                                    children: " الرصيد"
-                                }),
-                                /*#__PURE__*/ _jsx("th", {
-                                    children: " الديون"
-                                }),
-                                /*#__PURE__*/ _jsx("th", {
-                                    children: " الكلفة"
-                                })
-                            ]
-                        })
-                    }),
-                    /*#__PURE__*/ _jsx("tbody", {
-                        children: /*#__PURE__*/ _jsxs("tr", {
-                            children: [
-                                /*#__PURE__*/ _jsx("td", {
-                                    children: "المجموع"
-                                }),
-                                /*#__PURE__*/ _jsx("td", {
-                                    children: countCustomers
-                                }),
-                                /*#__PURE__*/ _jsx("td", {
-                                    children: valueTotal
-                                }),
-                                /*#__PURE__*/ _jsx("td", {
-                                    children: priceTotal
-                                }),
-                                /*#__PURE__*/ _jsx("td", {
-                                    children: costTotal.toFixed(0)
-                                })
-                            ]
                         })
                     })
                 ]

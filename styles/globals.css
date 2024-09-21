@@ -12,12 +12,14 @@ button {
   cursor: pointer;
 }
 :root {
-  --font-color: #ecdfcc;
-  --bg-color: #181c14;
-  --border-color: #697565;
+  --font-color:  rgb(0,0,0);
+  /* --font-color:  rgb(220,34,41); */
+  --bg-color: white;
+  /* --border-color: #697565; */
+  --border-color: #000;
   --del-color: #ff5733;
   --edit-color: #32cd32;
-  --add-color: #1e90ff;
+  --add-color: rgb(220,34,41);
 }
 
 /* loader */
@@ -28,7 +30,7 @@ button {
   width: 100px;
   aspect-ratio: 1;
   border-radius: 50%;
-  border: 10px solid #9e94ee;
+  border: 10px solid rgb(99, 100, 102);
   animation: l20-1 0.8s infinite linear alternate, l20-2 1.6s infinite linear;
 }
 @keyframes l20-1 {
@@ -124,6 +126,7 @@ body {
 }
 .label-input {
   width: 40px;
+  font-weight: bolder;
 }
 
 .add-customer {
@@ -139,33 +142,81 @@ body {
   width: 190px;
   height: 40px;
   border-radius: 8px;
-  background-color: var(--add-color);
   font-size: 16px;
   font-weight: bold;
-  color: white;
   margin-top: 10px;
   padding: 5px;
 }
+.add-value-btn, 
+.add-cost-btn{
+  background-color: var(--add-color);
+  color: white;
+
+}
+
 
 .table-customers {
   border-collapse: collapse;
   margin-top: 30px;
   /* min-width: 385px; */
 }
+.title-table{
+    text-align: center;
+    margin-top: 30px;
+    color: var(--add-color);
+    font-size: 30px;
+    /* border: 1px solid var(--add-color); */
+    box-shadow: 5px 5px 10px var(--add-color) inset,
+    -1px -1px 10px var(--add-color) inset;
+    /* width: 100vh; */
+}
 
+.head-table th{
+    background-color: var(--add-color);
+    color: white;
+}
 .table-customers td,
 .table-customers th {
   border: 1px solid var(--border-color);
   text-align: center;
   padding: 5px;
 }
+.table-customers th{
+  /* color: black; */
+}
+.table-total{
+  margin: 30px auto;
+  border-collapse: collapse;
+  border: 1px solid black;
 
+}
+.table-total td , 
+.table-total th{
+  /* border: 1px solid black; */
+  border: 1px solid var(--border-color);
+  text-align: center;
+  padding: 5px;
+}
+.table-total th{
+  background-color: var(--add-color);
+  color: white;
+  
+}
+.table-total td{
+  box-shadow: 5px 5px 10px var(--add-color) inset,
+  -1px -1px 10px var(--add-color) inset;
+  font-weight: bold;
+  /* color: white; */
+  color: rgb(99,100,102)
+}
 .actions-buttons {
   display: flex;
   flex-direction: column;
   /* align-items: center; */
 }
 .actions-buttons button {
+  background-color: var(--add-color);
+  color: white;
   width: 70px;
   height: 20px;
   border: none;
@@ -173,34 +224,44 @@ body {
   margin-bottom: 5px;
   font-weight: bold;
   border-radius: 3px;
-  color: white;
+  /* color: var(--font-color); */
+  border: 1px var(--add-color) solid;
   /* padding: 10px; */
 }
 
+.actions-buttons td{
+}
+
 .actions-buttons .del-btn {
-  background-color: var(--del-color);
+
+
 }
 .actions-buttons .edit-btn {
-  background-color: var(--edit-color);
+  /* background-color: var(--edit-color); */
 }
 .actions-buttons .add-btn {
-  background-color: var(--add-color);
+  /* background-color: var(--add-color); */
 }
 
 .actions-buttons .add-cost-btn {
-  background-color: #e91e63;
 }
 
 .edit-modal {
-  color: #ecdfcc;
+  color: var(--add-color);
   display: flex;
   flex-direction: column;
   align-items: center;
   /* width:100vw ; */
   height: 100vh;
-  background-color: #181c14;
+  background-color: white;
   margin-top: 10px;
   /* color: yellow; */
+}
+.edit-modal h2{
+  font-weight: 900;
+}
+.edit-modal p{
+  font-weight: bolder;
 }
 .edit-modal div {
   margin-top: 10px;
@@ -209,8 +270,10 @@ body {
   align-items: center;
 }
 .edit-modal div input {
-  background-color: #697565;
-  color: white;
+  /* background-color: #697565; */
+  box-shadow: 1px 1px 5px var(--add-color) inset,
+    -1px -1px 10px var(--add-color) inset;
+  color: black;
   outline: none;
   border: none;
   margin-right: 5px;
@@ -234,10 +297,12 @@ body {
   font-weight: bold;
 }
 .edit-modal div.buttons button.ok {
-  background-color: rgb(74, 224, 94);
+  border: 2px solid var(--add-color);
+  color: var(--add-color);
 }
 .edit-modal div.buttons button.back {
-  background-color: rgb(250, 141, 77);
+  background-color: var(--add-color);
+  color: white;
 }
 
 .desc-buttons {
@@ -250,11 +315,13 @@ body {
   border: none;
   min-height: 30px;
   width: 40%;
-  background-color: #1565c0;
-  color: white;
+  /* background-color: var(--add-color); */
+  box-shadow: 1px 1px 10px var(--add-color) inset,
+  -1px -1px 10px var(--add-color) inset ; 
+  color: var(--add-color);
   font-weight: bold;
   padding: 3px;
-  border-radius: 3px;
+  border-radius: 3px;;
 }
 
 .cotainer-textarea {
@@ -266,6 +333,11 @@ body {
   margin: 10px auto;
   height: 300px;
   background-color: white;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  box-shadow: 5px 5px 10px var(--add-color) inset,
+  -5px -5px 10px var(--add-color) inset
 }
 .container-submit-btn {
   display: flex;
@@ -273,7 +345,7 @@ body {
   margin: 5px 0;
 }
 .container-submit-btn button {
-  background-color: #4caf50;
+  background-color: var(--add-color);
   color: white;
   border: none;
   width: 100px;
