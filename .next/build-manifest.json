@@ -5,8 +5,8 @@
   "devFiles": [],
   "ampDevFiles": [],
   "lowPriorityFiles": [
-    "static/kt6-TuxzoHXNQFZLwU926/_buildManifest.js",
-    "static/kt6-TuxzoHXNQFZLwU926/_ssgManifest.js"
+    "static/08JkpF8HbscdBp7QbHQdk/_buildManifest.js",
+    "static/08JkpF8HbscdBp7QbHQdk/_ssgManifest.js"
   ],
   "rootMainFiles": [],
   "pages": {
@@ -20,7 +20,7 @@
       "static/chunks/webpack-59c5c889f52620d6.js",
       "static/chunks/framework-af64bd368ed34feb.js",
       "static/chunks/main-04db41976265011b.js",
-      "static/css/8f829103d7d9ca2e.css",
+      "static/css/7b372558256e62a6.css",
       "static/chunks/pages/_app-bdf65c5118b91759.js"
     ],
     "/_error": [
@@ -40,7 +40,7 @@
       "static/chunks/framework-af64bd368ed34feb.js",
       "static/chunks/main-04db41976265011b.js",
       "static/chunks/749-0c5e0666ea53983a.js",
-      "static/chunks/969-0c511759f3096afc.js",
+      "static/chunks/969-8fbf20957145f8e3.js",
       "static/chunks/pages/customers-98c9552608f1530d.js"
     ],
     "/customers/add-customer-money": [
@@ -48,7 +48,7 @@
       "static/chunks/framework-af64bd368ed34feb.js",
       "static/chunks/main-04db41976265011b.js",
       "static/chunks/749-0c5e0666ea53983a.js",
-      "static/chunks/969-0c511759f3096afc.js",
+      "static/chunks/969-8fbf20957145f8e3.js",
       "static/chunks/pages/customers/add-customer-money-80f67b163f609773.js"
     ],
     "/customers/add/[id]": [
@@ -56,7 +56,7 @@
       "static/chunks/framework-af64bd368ed34feb.js",
       "static/chunks/main-04db41976265011b.js",
       "static/chunks/749-0c5e0666ea53983a.js",
-      "static/chunks/969-0c511759f3096afc.js",
+      "static/chunks/969-8fbf20957145f8e3.js",
       "static/chunks/pages/customers/add/[id]-19f8f9453eed1349.js"
     ],
     "/customers/addcost/[id]": [
@@ -64,7 +64,7 @@
       "static/chunks/framework-af64bd368ed34feb.js",
       "static/chunks/main-04db41976265011b.js",
       "static/chunks/749-0c5e0666ea53983a.js",
-      "static/chunks/969-0c511759f3096afc.js",
+      "static/chunks/969-8fbf20957145f8e3.js",
       "static/chunks/pages/customers/addcost/[id]-9d1174a41a246136.js"
     ],
     "/customers/addcustomer": [
@@ -72,7 +72,7 @@
       "static/chunks/framework-af64bd368ed34feb.js",
       "static/chunks/main-04db41976265011b.js",
       "static/chunks/749-0c5e0666ea53983a.js",
-      "static/chunks/969-0c511759f3096afc.js",
+      "static/chunks/969-8fbf20957145f8e3.js",
       "static/chunks/pages/customers/addcustomer-5d28fe3673ac767b.js"
     ],
     "/customers/edit/[id]": [
@@ -80,7 +80,7 @@
       "static/chunks/framework-af64bd368ed34feb.js",
       "static/chunks/main-04db41976265011b.js",
       "static/chunks/749-0c5e0666ea53983a.js",
-      "static/chunks/969-0c511759f3096afc.js",
+      "static/chunks/969-8fbf20957145f8e3.js",
       "static/chunks/pages/customers/edit/[id]-b847918dcf86f9cf.js"
     ]
   },

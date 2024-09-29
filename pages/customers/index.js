@@ -16,7 +16,7 @@ export default function Customer() {
   //   return { loader, setLoader };
   // };
   const {loader , setLoader} = useLoader()
-
+  const [search , setSearch] = useState("")
   const [state, handleSubmit] = useForm("mqazogok");
   if (state.succeeded) {
     alert("تم الارسال بنجاح");
@@ -67,6 +67,7 @@ export default function Customer() {
   let total = data.reduce((acc, curr) => {
     if (!acc[curr.name]) {
       acc[curr.name] = {
+        _id: curr._id , 
         name: curr.name,
         value: curr.value,
         price: curr.price,
@@ -139,7 +140,22 @@ export default function Customer() {
       })
     }
   }
-
+  let searchData = uniqueTotal.map((e, index) => {
+    if(search != "" && e.name.includes(search) )
+    return (
+      <tr key={index} style={{color:"black"}}>
+        <td>{index + 1}</td>
+        <td>{e.name}</td>
+        <td>{Number(e.price).toFixed(0)}</td>
+        <td className="actions-buttons">
+          <button className="del-btn" onClick={()=>{
+            delelteCustomerData(e)
+            setSearch("")
+          }} >حذف</button>
+        </td>
+      </tr>
+    );
+  })
   return (
     <Layout visible={loader}>
       
@@ -158,6 +174,32 @@ export default function Customer() {
         </div>
        
       </div>
+      <div className="search">
+      <input type="search"
+      placeholder="بحث"
+      value = {search}
+      onChange={(e)=> {
+        setSearch(e.target.value)
+      }}/>
+      </div>
+      {
+        (search != "") && <table className="search-table" dir="rtl">
+        <caption className="title-search-table title-table">جدول البحث</caption>
+      <thead>
+          <tr >
+            <th>م</th>
+            <th>الاسم</th>
+            <th>السعر</th>
+            <th> </th>
+          </tr>
+        </thead>
+        <tbody>
+          {/* todo */
+          searchData
+          }
+        </tbody>
+      </table>
+      }
       <h3 className="title-table">جدول الإحصائيات</h3>
       <table className="table-customers" dir="rtl">
         <thead>

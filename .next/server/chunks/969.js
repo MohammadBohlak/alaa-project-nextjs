@@ -110,6 +110,7 @@ function Customer() {
     //   return { loader, setLoader };
     // };
     const { loader , setLoader  } = (0,_hook_useLoader__WEBPACK_IMPORTED_MODULE_6__.useLoader)();
+    const [search, setSearch] = (0,react__WEBPACK_IMPORTED_MODULE_4__.useState)("");
     const [state, handleSubmit] = (0,_formspree_react__WEBPACK_IMPORTED_MODULE_1__.useForm)("mqazogok");
     if (state.succeeded) {
         alert("تم الارسال بنجاح");
@@ -152,6 +153,7 @@ function Customer() {
     let total = data.reduce((acc, curr)=>{
         if (!acc[curr.name]) {
             acc[curr.name] = {
+                _id: curr._id,
                 name: curr.name,
                 value: curr.value,
                 price: curr.price,
@@ -220,6 +222,35 @@ function Customer() {
             });
         }
     }
+    let searchData = uniqueTotal.map((e, index)=>{
+        if (search != "" && e.name.includes(search)) return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("tr", {
+            style: {
+                color: "black"
+            },
+            children: [
+                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("td", {
+                    children: index + 1
+                }),
+                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("td", {
+                    children: e.name
+                }),
+                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("td", {
+                    children: Number(e.price).toFixed(0)
+                }),
+                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("td", {
+                    className: "actions-buttons",
+                    children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("button", {
+                        className: "del-btn",
+                        onClick: ()=>{
+                            delelteCustomerData(e);
+                            setSearch("");
+                        },
+                        children: "حذف"
+                    })
+                })
+            ]
+        }, index);
+    });
     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_component_Layout__WEBPACK_IMPORTED_MODULE_5__["default"], {
         visible: loader,
         children: [
@@ -243,6 +274,48 @@ function Customer() {
                                 children: "إضافة زبون من حيث المبلغ"
                             })
                         })
+                    })
+                ]
+            }),
+            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                className: "search",
+                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("input", {
+                    type: "search",
+                    placeholder: "بحث",
+                    value: search,
+                    onChange: (e)=>{
+                        setSearch(e.target.value);
+                    }
+                })
+            }),
+            search != "" && /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("table", {
+                className: "search-table",
+                dir: "rtl",
+                children: [
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("caption", {
+                        className: "title-search-table title-table",
+                        children: "جدول البحث"
+                    }),
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("thead", {
+                        children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("tr", {
+                            children: [
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("th", {
+                                    children: "م"
+                                }),
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("th", {
+                                    children: "الاسم"
+                                }),
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("th", {
+                                    children: "السعر"
+                                }),
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("th", {
+                                    children: " "
+                                })
+                            ]
+                        })
+                    }),
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("tbody", {
+                        children: searchData
                     })
                 ]
             }),
