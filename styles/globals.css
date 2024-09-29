@@ -211,6 +211,7 @@ body{
   border: 1px solid var(--border-color);
   text-align: center;
   padding: 5px;
+  height: 100%  ; 
   /* width: calc(100vw); */
 }
 .table-customers th{
@@ -250,7 +251,7 @@ body{
   background-color: var(--add-color);
   color: white;
   width: 70px;
-  height: 20px;
+  height: 25px;
   border: none;
   margin-top: 8px;
   margin-bottom: 5px;
