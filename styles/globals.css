@@ -15,7 +15,7 @@ button {
   --font-color:  rgb(0,0,0);
   /* --font-color:  rgb(220,34,41); */
   --bg-color: white;
-  /* --border-color: #697565; */
+  --secondary-color: #697565;
   --border-color: #000;
   --del-color: #ff5733;
   --edit-color: #32cd32;
@@ -158,18 +158,38 @@ body {
 .table-customers {
   border-collapse: collapse;
   margin-top: 30px;
-  min-width: 100%;
+  /* min-width: 385px; */
   width: 100vw;
 }
+/* ////////////////////// */
+.search-table{
+  border-collapse: collapse;
+  margin-top: 30px;
+  /* min-width: 385px; */
+  width: 100%;
+}
+.title-search-table{
+  color: var(--secondary-color) !important;
+  box-shadow: 5px 5px 10px var(--secondary-color) inset,
+  -1px -1px 10px var(--secondary-color) inset !important; 
+  
+  
+}
+.search-table .actions-buttons button{
+  /* color: var(--add-color) !important; */
+  /* color: black; */
+  background-color: var(--secondary-color) !important;
+  /* border: 1px solid black; */
+}
+
+/* ////////////////////// */
 .title-table{
     text-align: center;
     margin-top: 30px;
     color: var(--add-color);
     font-size: 30px;
-    /* border: 1px solid var(--add-color); */
     box-shadow: 5px 5px 10px var(--add-color) inset,
     -1px -1px 10px var(--add-color) inset;
-    /* width: 100vh; */
 }
 
 .head-table th{
@@ -177,7 +197,9 @@ body {
     color: white;
 }
 .table-customers td,
-.table-customers th {
+.table-customers th,
+.search-table td ,
+.search-table , th {
   border: 1px solid var(--border-color);
   text-align: center;
   padding: 5px;
@@ -213,7 +235,7 @@ body {
 .actions-buttons {
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
+  align-items: center;
 }
 .actions-buttons button {
   background-color: var(--add-color);
@@ -226,7 +248,7 @@ body {
   font-weight: bold;
   border-radius: 3px;
   /* color: var(--font-color); */
-  border: 1px var(--add-color) solid;
+  /* border: 1px var(--add-color) solid; */
   /* padding: 10px; */
 }
 
@@ -355,4 +377,19 @@ body {
   border-radius: 5px;
   margin-bottom: 10px;
   font-size: 16px;
+}
+.search{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background-color: red; */
+  margin-top: 30px;
+  height: 30px;
+}
+input[type="search"] {
+  border: 2px solid var(--add-color);
+  height: 100%;
+  border-radius: 25px;
+  padding: 0 10px;
+  outline: none;
 }
