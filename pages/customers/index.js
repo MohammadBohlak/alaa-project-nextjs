@@ -3,20 +3,19 @@ import axios from "axios";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import Layout from "../component/Layout";
-import {useLoader} from '../../hook/useLoader'
+import { useLoader } from "../../hook/useLoader";
 // export const url = "http://localhost:3000";
 export const url = "https://alaa-project-nextjs-9hhq.vercel.app"
 
 export const getPrice = (value) => value * 1.25;
 export const getCost = (value) => value * 1.043;
 export default function Customer() {
-
   // function useLoader() {
   //   const [loader, setLoader] = useState("hidden");
   //   return { loader, setLoader };
   // };
-  const {loader , setLoader} = useLoader()
-  const [search , setSearch] = useState("")
+  const { loader, setLoader } = useLoader();
+  const [search, setSearch] = useState("");
   const [state, handleSubmit] = useForm("mqazogok");
   if (state.succeeded) {
     alert("تم الارسال بنجاح");
@@ -25,7 +24,7 @@ export default function Customer() {
   // const {loader , setLoader} = useLoader()
 
   const fetchData = () => {
-    setLoader("visible")
+    setLoader("visible");
     axios
       .get(`${url}/api/posts`)
       .then((res) => {
@@ -43,7 +42,7 @@ export default function Customer() {
         setData(dataOrdered);
       })
       .finally(() => {
-        setLoader("hidden")
+        setLoader("hidden");
       });
   };
 
@@ -53,21 +52,21 @@ export default function Customer() {
   async function deleteCustomer(e) {
     let x = window.confirm(`هل أنت متأكد من حذف بيانات ${e.name}  ؟`);
     if (x) {
-      setLoader("visible")
+      setLoader("visible");
       axios
         .delete(`${url}/api/posts/${e._id}`)
         .then(() => {
           fetchData();
         })
         .finally(() => {
-          setLoader("hidden")
+          setLoader("hidden");
         });
     }
   }
   let total = data.reduce((acc, curr) => {
     if (!acc[curr.name]) {
       acc[curr.name] = {
-        _id: curr._id , 
+        _id: curr._id,
         name: curr.name,
         value: curr.value,
         price: curr.price,
@@ -120,45 +119,48 @@ export default function Customer() {
       // setEmail('abuomarcom4@gmail.com')
     }
   }
-  let rmvData = data.filter((e)=>{
-      return e.name != "رمضان علوش"
-  })
+  let rmvData = data.filter((e) => {
+    return e.name != "رمضان علوش";
+  });
 
-  function delelteCustomerData(customer){
-    let OK = confirm(`هل انت متأكد من حذف جميع بيانات ${customer.name}`)
-    if(OK){
-      let customerData = data.filter((e)=>{
-        return customer.name == e.name
-      })
-      console.log(customerData)
-      
-      customerData.forEach((e)=>{
-        axios.delete(`${url}/api/posts/${e._id}`)
-        .then(()=>{
-          fetchData() 
-        })
-      })
+  function delelteCustomerData(customer) {
+    let OK = confirm(`هل انت متأكد من حذف جميع بيانات ${customer.name}`);
+    if (OK) {
+      let customerData = data.filter((e) => {
+        return customer.name == e.name;
+      });
+      console.log(customerData);
+
+      customerData.forEach((e) => {
+        axios.delete(`${url}/api/posts/${e._id}`).then(() => {
+          fetchData();
+        });
+      });
     }
   }
   let searchData = uniqueTotal.map((e, index) => {
-    if(search != "" && e.name.includes(search) )
-    return (
-      <tr key={index} style={{color:"black"}}>
-        <td>{index + 1}</td>
-        <td>{e.name}</td>
-        <td>{Number(e.price).toFixed(0)}</td>
-        <td className="actions-buttons">
-          <button className="del-btn" onClick={()=>{
-            delelteCustomerData(e)
-            setSearch("")
-          }} >حذف</button>
-        </td>
-      </tr>
-    );
-  })
+    if (search != "" && e.name.includes(search))
+      return (
+        <tr key={index} style={{ color: "black" }}>
+          <td>{index + 1}</td>
+          <td>{e.name}</td>
+          <td>{Number(e.price).toFixed(0)}</td>
+          <td className="actions-buttons">
+            <button
+              className="del-btn"
+              onClick={() => {
+                delelteCustomerData(e);
+                setSearch("");
+              }}
+            >
+              حذف
+            </button>
+          </td>
+        </tr>
+      );
+  });
   return (
     <Layout visible={loader}>
-      
       <div className="add-customer">
         <div>
           <Link href="/customers/addcustomer">
@@ -167,72 +169,84 @@ export default function Customer() {
         </div>
         <div>
           <Link href="/customers/add-customer-money">
-            <button className="add-cost-btn">
-              إضافة زبون من حيث المبلغ
-            </button>
+            <button className="add-cost-btn">إضافة زبون من حيث المبلغ</button>
           </Link>
         </div>
-       
       </div>
+
       <div className="search">
-      <input type="search"
-      placeholder="بحث"
-      value = {search}
-      onChange={(e)=> {
-        setSearch(e.target.value)
-      }}/>
+        <input
+          type="search"
+          placeholder="بحث"
+          value={search}
+          onChange={(e) => {
+            setSearch(e.target.value);
+          }}
+        />
       </div>
-      {
-        (search != "") && <table className="search-table" dir="rtl">
-        <caption className="title-search-table title-table">جدول البحث</caption>
-      <thead>
-          <tr >
-            <th>م</th>
-            <th>الاسم</th>
-            <th>السعر</th>
-            <th> </th>
-          </tr>
-        </thead>
-        <tbody>
-          {/* todo */
-          searchData
-          }
-        </tbody>
-      </table>
-      }
+
+      {search != "" && (
+        <table className="search-table" dir="rtl">
+          <caption className="title-search-table title-table">
+            جدول البحث
+          </caption>
+          <thead>
+            <tr>
+              <th>م</th>
+              <th>الاسم</th>
+              <th>السعر</th>
+              <th> </th>
+            </tr>
+          </thead>
+          <tbody>{/* todo */ searchData}</tbody>
+        </table>
+      )}
       <h3 className="title-table">جدول الإحصائيات</h3>
+
       <table className="table-customers" dir="rtl">
         <thead>
-          <tr className="head-table" >
+          <tr className="head-table">
             <th>م</th>
             <th>الاسم</th>
             <th>قيمة الرصيد</th>
             <th>السعر</th>
             <th>التكلفة</th>
-            <th> </th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
           {uniqueTotal.map((e, index) => {
             return (
-              <tr key={index} style={{color:"black"}}>
-                <td style={{background:"var(--add-color)" , color:"white" , borderColor:"white"} }>{index + 1}</td>
+              <tr key={index} style={{ color: "black" }}>
+                <td
+                  style={{
+                    background: "var(--add-color)",
+                    color: "white",
+                    borderColor: "white",
+                  }}
+                >
+                  {index + 1}
+                </td>
                 <td>{e.name}</td>
                 <td>{e.value}</td>
                 <td>{Number(e.price).toFixed(0)}</td>
                 <td>{Number(e.cost).toFixed(0)}</td>
-                <td style={{height:"100%"}} className="actions-buttons">
-                  <button className="del-btn" onClick={()=>{
-                    delelteCustomerData(e)
-                  }} >حذف</button>
+                <td style={{ height: "100%" }} className="actions-buttons">
+                  <button
+                    className="del-btn"
+                    onClick={() => {
+                      delelteCustomerData(e);
+                    }}
+                  >
+                    حذف
+                  </button>
                 </td>
               </tr>
             );
           })}
         </tbody>
       </table>
-      <table
-        className="table-total">
+      <table className="table-total">
         <thead>
           <tr>
             <th> </th>
@@ -244,7 +258,12 @@ export default function Customer() {
         </thead>
         <tbody>
           <tr>
-            <td style={{background:"var(--add-color)" , color:"white"}}>المجموع</td>
+            <td style={{ 
+              background: "var(--add-color)",
+               color: "white"
+                }}>
+              المجموع
+            </td>
             <td>{countCustomers}</td>
             <td>{valueTotal}</td>
             <td>{priceTotal}</td>

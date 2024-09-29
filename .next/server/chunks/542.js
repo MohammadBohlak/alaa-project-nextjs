@@ -359,9 +359,7 @@ function Customer() {
                                 /*#__PURE__*/ _jsx("th", {
                                     children: "التكلفة"
                                 }),
-                                /*#__PURE__*/ _jsx("th", {
-                                    children: " "
-                                })
+                                /*#__PURE__*/ _jsx("th", {})
                             ]
                         })
                     }),
