@@ -57,7 +57,7 @@ export default function EditId() {
           />
         </div>
         <div>
-          <label className="label-input">الرصيد</label>
+          <label className="label-input">المبلغ</label>
           <input
             type="text"
             value={value}
