@@ -59,6 +59,7 @@ export default function EditId() {
           <label className="label-input">الرصيد</label>
           <input
             type="text"
+            inputmode="numeric"
             value={value}
             onChange={(e) => {
               setValue(e.target.value);
